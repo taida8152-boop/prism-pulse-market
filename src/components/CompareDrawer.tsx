@@ -48,7 +48,7 @@ const CompareDrawer = () => {
                 </tr>
               </thead>
               <tbody>
-                {allKeys.map((key) => (
+              {allKeys.map((key: string) => (
                   <tr key={key} className="border-b border-border/50 hover:bg-muted/20 transition-colors">
                     <td className="p-3 text-muted-foreground">{key}</td>
                     {items.map((item) => (
