@@ -1,11 +1,13 @@
 import { motion } from "framer-motion";
-import { Tv, WashingMachine, CookingPot, LayoutGrid } from "lucide-react";
+import { Tv, WashingMachine, CookingPot, LayoutGrid, AirVent, Snowflake } from "lucide-react";
 import { useStore } from "@/store/useStore";
 import { categoryLabels } from "@/data/products";
 
 const categories = [
   { key: "all", label: "Tous", icon: LayoutGrid },
   { key: "image-son", label: categoryLabels["image-son"], icon: Tv },
+  { key: "climatisation", label: categoryLabels["climatisation"], icon: AirVent },
+  { key: "froid", label: categoryLabels["froid"], icon: Snowflake },
   { key: "lavage", label: categoryLabels["lavage"], icon: WashingMachine },
   { key: "cuisine", label: categoryLabels["cuisine"], icon: CookingPot },
 ];
