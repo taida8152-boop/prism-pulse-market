@@ -127,6 +127,8 @@ const AdminDashboard = () => {
             <input value={form.price} onChange={(e) => setForm({ ...form, price: e.target.value })} placeholder="Prix (DA)" type="number" className="w-full bg-muted/50 border border-border rounded-lg px-4 py-2 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50" />
             <select value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value as Category })} className="w-full bg-muted/50 border border-border rounded-lg px-4 py-2 text-foreground focus:outline-none focus:border-primary/50">
               <option value="image-son">Image & Son</option>
+              <option value="climatisation">Climatisation</option>
+              <option value="froid">Froid</option>
               <option value="lavage">Lavage</option>
               <option value="cuisine">Cuisine</option>
             </select>
