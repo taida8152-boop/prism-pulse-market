@@ -166,7 +166,8 @@ export const initialProducts: Product[] = [
   },
 ];
 
-export const WHATSAPP_NUMBER = "212600000000";
+export const WHATSAPP_NUMBERS = ["221776652675", "221776307770"];
+export const WHATSAPP_NUMBER = WHATSAPP_NUMBERS[0];
 
 export function formatPrice(price: number): string {
   return new Intl.NumberFormat("fr-FR", { style: "decimal" }).format(price) + " FCFA";
