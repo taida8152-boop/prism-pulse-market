@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import HeroSection from "@/components/HeroSection";
-import FlashSale from "@/components/FlashSale";
 import { Link } from "react-router-dom";
 import { ArrowRight, Shield, Truck, Headphones } from "lucide-react";
 
@@ -38,7 +37,7 @@ const Index = () => {
         </div>
       </section>
 
-      <FlashSale />
+      
 
       <section className="py-20 text-center">
         <div className="container mx-auto px-4">

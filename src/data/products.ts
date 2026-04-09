@@ -22,7 +22,6 @@ export interface Product {
   category: Category;
   description: string;
   specs: Record<string, string>;
-  isFlashSale?: boolean;
   whatsappClicks: number;
 }
 
