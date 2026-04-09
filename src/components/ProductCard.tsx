@@ -1,21 +1,32 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, GitCompare, X } from "lucide-react";
-import { Product, formatPrice, generateWhatsAppLink } from "@/data/products";
+import { Product, formatPrice, WHATSAPP_NUMBERS } from "@/data/products";
 import { useStore } from "@/store/useStore";
 
 interface Props {
   product: Product;
 }
 
+const generateWhatsAppMsg = (product: Product) => {
+  return encodeURIComponent(
+    `Bonjour ! Je suis intéressé(e) par :\n\n` +
+    `🛒 *${product.name}*\n` +
+    `💰 Prix : ${formatPrice(product.price)}\n` +
+    `🆔 Réf : ${product.id}\n\n` +
+    `Merci de me confirmer la disponibilité.`
+  );
+};
+
 const ProductCard = ({ product }: Props) => {
   const [showSpecs, setShowSpecs] = useState(false);
   const { compareList, addToCompare, removeFromCompare, incrementWhatsApp } = useStore();
   const isCompared = compareList.includes(product.id);
 
-  const handleWhatsApp = () => {
+  const handleWhatsApp = (number: string) => {
     incrementWhatsApp(product.id);
-    window.open(generateWhatsAppLink(product), "_blank");
+    const msg = generateWhatsAppMsg(product);
+    window.open(`https://wa.me/${number}?text=${msg}`, "_blank");
   };
 
   return (
@@ -78,15 +89,19 @@ const ProductCard = ({ product }: Props) => {
         </div>
 
         <div className="flex gap-2">
-          <motion.button
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
-            onClick={handleWhatsApp}
-            className="btn-neon flex-1 flex items-center justify-center gap-2 text-sm py-2.5"
-          >
-            <MessageCircle className="w-4 h-4" />
-            Acheter via WhatsApp
-          </motion.button>
+          {WHATSAPP_NUMBERS.map((num, idx) => (
+            <motion.button
+              key={num}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              onClick={() => handleWhatsApp(num)}
+              className="btn-neon flex-1 flex items-center justify-center gap-1.5 text-xs py-2.5"
+            >
+              <MessageCircle className="w-4 h-4" />
+              Ligne {idx + 1}
+            </motion.button>
+          ))}
+        </div>
 
           <motion.button
             whileHover={{ scale: 1.05 }}
