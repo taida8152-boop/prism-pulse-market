@@ -1,12 +1,11 @@
 import { motion } from "framer-motion";
 import HeroSection from "@/components/HeroSection";
-import FlashSale from "@/components/FlashSale";
 import { Link } from "react-router-dom";
 import { ArrowRight, Shield, Truck, Headphones } from "lucide-react";
 
 const features = [
-  { icon: Truck, title: "Livraison Rapide", desc: "Partout en Algérie" },
-  { icon: Shield, title: "Garantie 2 Ans", desc: "Sur tous nos produits" },
+  { icon: Truck, title: "Livraison Gratuite", desc: "Partout à Dakar" },
+  { icon: Shield, title: "Garantie 1 An", desc: "Sur tous nos produits" },
   { icon: Headphones, title: "Support 24/7", desc: "À votre écoute" },
 ];
 
@@ -38,7 +37,7 @@ const Index = () => {
         </div>
       </section>
 
-      <FlashSale />
+      
 
       <section className="py-20 text-center">
         <div className="container mx-auto px-4">

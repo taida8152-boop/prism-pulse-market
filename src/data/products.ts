@@ -22,7 +22,6 @@ export interface Product {
   category: Category;
   description: string;
   specs: Record<string, string>;
-  isFlashSale?: boolean;
   whatsappClicks: number;
 }
 
@@ -44,7 +43,6 @@ export const initialProducts: Product[] = [
     category: "image-son",
     description: "Écran OLED 4K UHD avec HDR10+, Dolby Vision et son surround intégré. Processeur IA pour une image toujours parfaite.",
     specs: { "Taille": '65"', "Résolution": "4K UHD", "HDR": "HDR10+ / Dolby Vision", "Smart TV": "Oui", "Connectivité": "WiFi 6, Bluetooth 5.2", "Ports HDMI": "4" },
-    isFlashSale: true,
     whatsappClicks: 24,
   },
   {
@@ -56,7 +54,6 @@ export const initialProducts: Product[] = [
     category: "climatisation",
     description: "Climatiseur split ASTECH avec technologie Inverter, tube 100% cuivre CertiTube, connectivité WiFi et télécommande intelligente.",
     specs: { "Type": "Split", "Technologie": "Inverter", "Tube": "100% Cuivre", "WiFi": "Oui", "Classe": "A++", "Garantie": "12 mois" },
-    isFlashSale: true,
     whatsappClicks: 31,
   },
   {
@@ -88,7 +85,6 @@ export const initialProducts: Product[] = [
     category: "image-son",
     description: "Grand écran 75 pouces Android TV 4K avec Google Assistant, Chromecast intégré, WiFi 2.4G/5G et Bluetooth 5.0.",
     specs: { "Taille": '75"', "Résolution": "4K UHD", "Système": "Android TV", "Google Assistant": "Oui", "WiFi": "2.4G/5G", "Bluetooth": "5.0" },
-    isFlashSale: true,
     whatsappClicks: 22,
   },
   {
@@ -166,7 +162,8 @@ export const initialProducts: Product[] = [
   },
 ];
 
-export const WHATSAPP_NUMBER = "212600000000";
+export const WHATSAPP_NUMBERS = ["221776652675", "221776307770"];
+export const WHATSAPP_NUMBER = WHATSAPP_NUMBERS[0];
 
 export function formatPrice(price: number): string {
   return new Intl.NumberFormat("fr-FR", { style: "decimal" }).format(price) + " FCFA";

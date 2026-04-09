@@ -1,21 +1,32 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageCircle, GitCompare, Zap, X } from "lucide-react";
-import { Product, formatPrice, generateWhatsAppLink } from "@/data/products";
+import { MessageCircle, GitCompare, X } from "lucide-react";
+import { Product, formatPrice, WHATSAPP_NUMBERS } from "@/data/products";
 import { useStore } from "@/store/useStore";
 
 interface Props {
   product: Product;
 }
 
+const generateWhatsAppMsg = (product: Product) => {
+  return encodeURIComponent(
+    `Bonjour ! Je suis intéressé(e) par :\n\n` +
+    `🛒 *${product.name}*\n` +
+    `💰 Prix : ${formatPrice(product.price)}\n` +
+    `🆔 Réf : ${product.id}\n\n` +
+    `Merci de me confirmer la disponibilité.`
+  );
+};
+
 const ProductCard = ({ product }: Props) => {
   const [showSpecs, setShowSpecs] = useState(false);
   const { compareList, addToCompare, removeFromCompare, incrementWhatsApp } = useStore();
   const isCompared = compareList.includes(product.id);
 
-  const handleWhatsApp = () => {
+  const handleWhatsApp = (number: string) => {
     incrementWhatsApp(product.id);
-    window.open(generateWhatsAppLink(product), "_blank");
+    const msg = generateWhatsAppMsg(product);
+    window.open(`https://wa.me/${number}?text=${msg}`, "_blank");
   };
 
   return (
@@ -25,12 +36,6 @@ const ProductCard = ({ product }: Props) => {
       onMouseEnter={() => setShowSpecs(true)}
       onMouseLeave={() => setShowSpecs(false)}
     >
-      {product.isFlashSale && (
-        <div className="absolute top-3 left-3 z-20 flex items-center gap-1 bg-destructive/90 text-destructive-foreground text-xs font-bold px-3 py-1 rounded-full">
-          <Zap className="w-3 h-3" />
-          Flash
-        </div>
-      )}
 
       <div className="relative aspect-square overflow-hidden rounded-t-xl">
         <img
@@ -83,17 +88,21 @@ const ProductCard = ({ product }: Props) => {
           )}
         </div>
 
-        <div className="flex gap-2">
-          <motion.button
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
-            onClick={handleWhatsApp}
-            className="btn-neon flex-1 flex items-center justify-center gap-2 text-sm py-2.5"
-          >
-            <MessageCircle className="w-4 h-4" />
-            Acheter via WhatsApp
-          </motion.button>
-
+        <div className="flex flex-col gap-2">
+          <div className="flex gap-2">
+            {WHATSAPP_NUMBERS.map((num, idx) => (
+              <motion.button
+                key={num}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                onClick={() => handleWhatsApp(num)}
+                className="btn-neon flex-1 flex items-center justify-center gap-1.5 text-xs py-2.5"
+              >
+                <MessageCircle className="w-4 h-4" />
+                Ligne {idx + 1}
+              </motion.button>
+            ))}
+          </div>
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -102,14 +111,14 @@ const ProductCard = ({ product }: Props) => {
                 ? removeFromCompare(product.id)
                 : addToCompare(product.id)
             }
-            className={`p-2.5 rounded-xl border transition-all ${
+            className={`w-full p-2.5 rounded-xl border transition-all flex items-center justify-center gap-2 text-sm ${
               isCompared
                 ? "bg-neon-blue/20 border-neon-blue/50 text-neon-blue"
                 : "border-border text-muted-foreground hover:text-foreground hover:border-primary/30"
             }`}
-            title={isCompared ? "Retirer de la comparaison" : "Comparer"}
           >
             {isCompared ? <X className="w-4 h-4" /> : <GitCompare className="w-4 h-4" />}
+            {isCompared ? "Retirer" : "Comparer"}
           </motion.button>
         </div>
       </div>

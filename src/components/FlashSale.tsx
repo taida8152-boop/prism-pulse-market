@@ -6,7 +6,7 @@ import ProductCard from "./ProductCard";
 
 const FlashSale = () => {
   const { products } = useStore();
-  const flashProducts = products.filter((p) => p.isFlashSale);
+  const flashProducts = products.slice(0, 4);
 
   const [timeLeft, setTimeLeft] = useState({
     hours: 5,
