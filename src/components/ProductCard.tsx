@@ -88,21 +88,21 @@ const ProductCard = ({ product }: Props) => {
           )}
         </div>
 
-        <div className="flex gap-2">
-          {WHATSAPP_NUMBERS.map((num, idx) => (
-            <motion.button
-              key={num}
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-              onClick={() => handleWhatsApp(num)}
-              className="btn-neon flex-1 flex items-center justify-center gap-1.5 text-xs py-2.5"
-            >
-              <MessageCircle className="w-4 h-4" />
-              Ligne {idx + 1}
-            </motion.button>
-          ))}
-        </div>
-
+        <div className="flex flex-col gap-2">
+          <div className="flex gap-2">
+            {WHATSAPP_NUMBERS.map((num, idx) => (
+              <motion.button
+                key={num}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                onClick={() => handleWhatsApp(num)}
+                className="btn-neon flex-1 flex items-center justify-center gap-1.5 text-xs py-2.5"
+              >
+                <MessageCircle className="w-4 h-4" />
+                Ligne {idx + 1}
+              </motion.button>
+            ))}
+          </div>
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -111,14 +111,14 @@ const ProductCard = ({ product }: Props) => {
                 ? removeFromCompare(product.id)
                 : addToCompare(product.id)
             }
-            className={`p-2.5 rounded-xl border transition-all ${
+            className={`w-full p-2.5 rounded-xl border transition-all flex items-center justify-center gap-2 text-sm ${
               isCompared
                 ? "bg-neon-blue/20 border-neon-blue/50 text-neon-blue"
                 : "border-border text-muted-foreground hover:text-foreground hover:border-primary/30"
             }`}
-            title={isCompared ? "Retirer de la comparaison" : "Comparer"}
           >
             {isCompared ? <X className="w-4 h-4" /> : <GitCompare className="w-4 h-4" />}
+            {isCompared ? "Retirer" : "Comparer"}
           </motion.button>
         </div>
       </div>
