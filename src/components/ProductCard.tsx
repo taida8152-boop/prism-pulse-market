@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageCircle, GitCompare, Zap, X } from "lucide-react";
+import { MessageCircle, GitCompare, X } from "lucide-react";
 import { Product, formatPrice, generateWhatsAppLink } from "@/data/products";
 import { useStore } from "@/store/useStore";
 
@@ -25,12 +25,6 @@ const ProductCard = ({ product }: Props) => {
       onMouseEnter={() => setShowSpecs(true)}
       onMouseLeave={() => setShowSpecs(false)}
     >
-      {product.isFlashSale && (
-        <div className="absolute top-3 left-3 z-20 flex items-center gap-1 bg-destructive/90 text-destructive-foreground text-xs font-bold px-3 py-1 rounded-full">
-          <Zap className="w-3 h-3" />
-          Flash
-        </div>
-      )}
 
       <div className="relative aspect-square overflow-hidden rounded-t-xl">
         <img
