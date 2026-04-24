@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Lock, LogOut, Plus, Trash2, Edit2, MessageCircle, Save, X } from "lucide-react";
+import { Lock, LogOut, Plus, Trash2, Edit2, MessageCircle, Save, X, RotateCcw } from "lucide-react";
 import { useStore } from "@/store/useStore";
 import { formatPrice, type Product, type Category, categoryLabels } from "@/data/products";
 
@@ -67,7 +67,7 @@ interface EditForm {
 }
 
 const AdminDashboard = () => {
-  const { products, deleteProduct, addProduct, updateProduct, logoutAdmin } = useStore();
+  const { products, deleteProduct, addProduct, updateProduct, logoutAdmin, resetProducts } = useStore();
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editForm, setEditForm] = useState<EditForm>({ name: "", price: "", oldPrice: "", category: "image-son", description: "" });
   const [showAdd, setShowAdd] = useState(false);
@@ -190,9 +190,17 @@ const AdminDashboard = () => {
             <h1 className="font-heading text-3xl font-bold text-foreground">Dashboard Admin</h1>
             <p className="text-muted-foreground">Gérez vos produits et suivez les performances</p>
           </div>
-          <button onClick={logoutAdmin} className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
-            <LogOut className="w-4 h-4" /> Déconnexion
-          </button>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => { if (confirm("Réinitialiser tous les produits aux valeurs d'origine ?")) resetProducts(); }}
+              className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <RotateCcw className="w-4 h-4" /> Réinitialiser
+            </button>
+            <button onClick={logoutAdmin} className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
+              <LogOut className="w-4 h-4" /> Déconnexion
+            </button>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
