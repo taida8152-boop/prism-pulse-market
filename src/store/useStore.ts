@@ -58,7 +58,7 @@ export const useStore = create<StoreState>()(
       logoutAdmin: () => set({ isAdmin: false }),
     }),
     {
-      name: "electropremium-store",
+      name: "electropremium-store-v2",
       partialize: (state) => ({
         products: state.products,
         isAdmin: state.isAdmin,
